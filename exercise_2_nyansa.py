@@ -39,7 +39,6 @@ poor_devices = average.filter(lambda x: x[1] <=50)
 poor_devices_id = poor_devices.map(lambda x:((x[0].split('-'))[1],x[1]))
 id_device_type = average.map(lambda x:((x[0].split('-'))[1],(x[0].split('-'))[0]))
 
-
 poor_device_count = sorted(poor_devices_id.countByKey().items())
 total_count = sorted(id_device_type.countByKey().items())
 
