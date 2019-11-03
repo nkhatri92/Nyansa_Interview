@@ -5,6 +5,7 @@ Apache Spark 2.4.4
 Python 3.5+
 
 ### Exercise 1: URL Count
+Complexity: O(N)
 #### To run:
 `spark-submit exercise_1_nyansa.py input.txt`
 
