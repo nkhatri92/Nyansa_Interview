@@ -6,8 +6,8 @@ Python 3.5+
 
 ### Exercise 1:
 #### To run:
-spark-submit Exercise_1_Nyansa.py input.txt
+spark-submit exercise_1_nyansa.py input.txt
 
 ### Exercise 2:
 #### To run: 
-spark-submit Exercise_2_Nyansa.py input_data.txt
+spark-submit exercise_2_nyansa.py input_data.txt
