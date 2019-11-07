@@ -17,16 +17,13 @@ df1 = df1.withColumn('to_time_stamp', split_col.getItem(0))
 df1 = df1.withColumn('url', split_col.getItem(1))
 
 #convert to date
-df1 = df1.withColumn('date', F.from_unixtime('to_time_stamp','MM/dd/yyyy').cast(StringType()))
+df1 = df1.withColumn('date', F.from_unixtime('to_time_stamp','MM/dd/yyyy')).withColumn('date', F.to_date('date','MM/dd/yyyy'))
 
-#group by date and url
-df_grouped= df1.groupby('date','url') \
-               .agg(F.count('url')) \
-               .orderBy(["date", "count(url)"], ascending=[1, 0])
-               
-df_grouped = df_grouped.withColumnRenamed('count(url)','counts')
-
-#df1.select(F.rpad("date", 14, " GMT")).show() 
+#group by date and url, count urls
+df_grouped= df1.groupby('date','url').count() \
+               .orderBy(["date", "count"], ascending=[1, 0]) \
+               .withColumn('date', F.date_format('date','MM/dd/yyyy'))\
+               .withColumnRenamed('count','counts')
 
 l  = df_grouped.collect()
 
@@ -40,4 +37,4 @@ def print_result(list_data):
         prev_date = each_row_val.date
 
 print_result(l)
-spark.stop()
+
